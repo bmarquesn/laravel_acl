@@ -1,5 +1,27 @@
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
+CRUD Laravel com ACL para estudo e aprendizado do mesmo. Será feito no Windows. Passos para fazê-lo:
+
+- Instalar um servidor Apache com Banco de Dados, MySql por exemplo. Eu utilizo o [XAMPP](https://www.apachefriends.org/pt_br/index.html)
+- Instalar um gerenciador de dependências, o [COMPOSER](https://getcomposer.org/)
+- Abrir o CMD \(\*para cada comando digitado pressionar ENTER para rodá\-lo\)
+    - Acessar o diretório onde ficará o projeto
+    - Digitar o comando **composer global require laravel/installer**
+    - Digitar o comando **composer create-project --prefer-dist laravel/laravel**
+        - Será criada uma pasta "laravel". Pegar todos os arquivos desta pasta e colocá-los no diretório do projeto. Depois apagar esta pasta
+            - Se o projeto vier do GIT, este por exemplo, será preciso baixar as libraries do Laravel \(Vendor e etc\) que estão no \.gitignore. Para isso ir no diretorio onde ficaram os arquivos baixados e digitar **composer install**
+    - Definir no arquivo \.env, que fica na raiz da aplicação, a configuracao com o banco de dados
+    - Para padronização e boa utilização do framework Laravel, neste projeto serão usadas as "Migrations"
+        - Migrations são os arquivos que criam as tabelas no Banco de Dados
+        - Digitar o comando **php artisan make:model Models\NomeDaModel -mcr** \(MODEL, COONTROLLER, RESOURCE\)
+            - Resources funcionam como um camada de tratamento entre o Eloquent e as respostas JSON que são expostas pela API. Estas classes permitem que transformemos facilmente, models e collections em JSON. Em resumo, é possível estabelecer uma melhor e mais fácil comunicação entre a aplicação e a API
+            - o Laravel, por padrão, salva suas Models na pasta "app". Como utilizaremos as Models dentro da pasta "app/Models" precisamos configurar o endereço da pasta no arquivo "config/auth\.php" dentro de "providers\->users\->model":
+                - `'model' => App\Models\NomeModelUser::class`
+        - Nos arquivos "migrate" que são criados, na função "up", inserir os campos que terão que existir na respectiva tabela
+            - Consultar na URL [https://laravel.com/docs/7.x/migrations](https://laravel.com/docs/7.x/migrations) os tipos de campos para serem criados
+        - Digitar o comando **php artisan migrate**
+    - Digitar o comando **php artisan serve**
+
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
