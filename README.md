@@ -19,8 +19,11 @@ CRUD Laravel com ACL para estudo e aprendizado do mesmo. Será feito no Windows.
                 - `'model' => App\Models\NomeModelUser::class`
         - Nos arquivos "migrate" que são criados, na função "up", inserir os campos que terão que existir na respectiva tabela
             - Consultar na URL [https://laravel.com/docs/7.x/migrations](https://laravel.com/docs/7.x/migrations) os tipos de campos para serem criados
-        - Digitar o comando **php artisan migrate**
+        - Depois de criadas as migrates, digitar o comando **php artisan migrate**
     - Digitar o comando **php artisan serve**
+
+Foi utilizado ACL. Seguidas orientações do link:
+[http://www.rscoder.com/2020/05/laravel-7x-user-roles-and-permissions.html](http://www.rscoder.com/2020/05/laravel-7x-user-roles-and-permissions.html)
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
