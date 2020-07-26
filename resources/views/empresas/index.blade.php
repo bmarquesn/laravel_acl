@@ -6,7 +6,7 @@
                 <h2>Empresas</h2>
             </div>
             <div class="pull-right">
-                @can('product-create')
+                @can('empresa-create')
                     <a class="btn btn-success" href="{{ route('empresas.create') }}"> Criar Nova Empresa</a>
                 @endcan
             </div>

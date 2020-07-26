@@ -28,7 +28,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        $roles = Role::pluck('nome', 'nome')->all();
+        $roles = Role::pluck('name', 'name')->all();
         return view('usuarios.create', compact('roles'));
     }
     /**
@@ -71,8 +71,8 @@ class UsuarioController extends Controller
     public function edit($id)
     {
         $usuario = Usuario::find($id);
-        $roles = Role::pluck('nome', 'nome')->all();
-        $userRole = $usuario->roles->pluck('nome', 'nome')->all();
+        $roles = Role::pluck('name', 'name')->all();
+        $userRole = $usuario->roles->pluck('name', 'name')->all();
         return view('usuarios.edit', compact('usuario', 'roles', 'userRole'));
     }
     /**

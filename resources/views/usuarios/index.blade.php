@@ -21,7 +21,7 @@
             <th>Nome</th>
             <th>E-mail</th>
             <th>Regras</th>
-            <th width="280px">Ação</th>
+            <th>Ação</th>
         </tr>
         @foreach($data as $key => $usuario)
             <tr>
@@ -32,22 +32,21 @@
                     @if(!empty($usuario->getRoleNames()))
                         @foreach($usuario->getRoleNames() as $v)
                             <label class="badge badge-success">{{ $v }}</label>
-                @endforeach
-            @endif
-            </td>
+                        @endforeach
+                    @endif
+                </td>
             <td>
                 <a class="btn btn-info" href="{{ route('usuarios.show', $usuario->id) }}">Exibir</a>
                 <a class="btn btn-primary" href="{{ route('usuarios.edit', $usuario->id) }}">Editar</a>
                 {!! Form::open(['method' => 'DELETE', 'route' => ['usuarios.destroy', $usuario->id], 'style' => 'display:inline']) !!}
-                /*escaped*/{!!
-                ?>Form::submit('Excluir', ['class' => 'btn btn-danger']) !!}
-                /*escaped*/{!!
-                ?>Form::close() !!}
+                @if(Auth::user()->id!=$usuario->id)
+                    {!! Form::submit('Excluir', ['class' => 'btn btn-danger']) !!}
+                @endif
+                {!! Form::close() !!}
             </td>
             </tr>
         @endforeach
     </table>
-    /*escaped*/{!!
-    ?>$data->render() !!}
+    {!! $data->render() !!}
     <p class="text-center text-primary"><small>Tutorial by rscoder.com</small></p>
 @endsection

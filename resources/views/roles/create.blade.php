@@ -34,7 +34,7 @@
                 <br />
                 @foreach($permission as $value)
                     <label>{{ Form::checkbox('permission[]', $value->id, false, ['class' => 'name']) }}
-                        /*blade*/{{ ?>$value->name }}</label>
+                    {{ $value->name }}</label>
                     <br />
                 @endforeach
             </div>

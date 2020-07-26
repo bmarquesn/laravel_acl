@@ -6,7 +6,7 @@
                 <h2>Adicionar nova Empresa</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('empresas.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('empresas.index') }}"> Voltar</a>
             </div>
         </div>
     </div>

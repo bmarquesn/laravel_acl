@@ -35,16 +35,13 @@
                     @can('role-delete')
                         {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy', $role->id], 'style' =>
                         'display:inline']) !!}
-                        /*escaped*/{!!
-                        ?>Form::submit('Excluir', ['class' => 'btn btn-danger']) !!}
-                        /*escaped*/{!!
-                        ?>Form::close() !!}
+                        {!! Form::submit('Excluir', ['class' => 'btn btn-danger']) !!}
+                        {!! Form::close() !!}
                     @endcan
                 </td>
             </tr>
         @endforeach
     </table>
-    /*escaped*/{!!
-    ?>$roles->render() !!}
+    {!! $roles->render() !!}
     <p class="text-center text-primary"><small>Tutorial by rscoder.com</small></p>
 @endsection

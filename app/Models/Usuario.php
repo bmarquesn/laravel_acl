@@ -14,6 +14,8 @@ class Usuario extends Authenticatable
     use Notifiable;
     use HasRoles;
 
+    protected $table = "usuarios";
+
     /**
      * The attributes that are mass assignable.
      *

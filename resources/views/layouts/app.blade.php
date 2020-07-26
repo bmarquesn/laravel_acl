@@ -14,8 +14,8 @@
     <title>{{ config('app.name', 'Laravel com ACL') }}</title>
 
     <!-- Scripts -->
-    <script type="text/javascript" src="{{ URL::asset('js/jquery-3.4.1.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('js/bootstrap/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('assets/js/jquery-3.4.1.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap/bootstrap.min.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com" />
@@ -52,9 +52,8 @@
                             <li><a class="nav-link" href="{{ route('empresas.index') }}">Empresas</a></li>
                             <li><a class="nav-link" href="{{ route('enderecos.index') }}">Endereços</a></li>
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->nome }} <span class="caret"></span>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
