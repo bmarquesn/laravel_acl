@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Usuario;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Usuario;
+use Spatie\Permission\Models\Role;
+use DB;
+use Hash;
 
 class UsuarioController extends Controller
 {
@@ -12,11 +16,11 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $data = Usuario::orderBy('id', 'DESC')->paginate(5);
+        return view('usuarios.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 5);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -24,9 +28,9 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::pluck('nome', 'nome')->all();
+        return view('usuarios.create', compact('roles'));
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -35,51 +39,79 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'nome' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|same:confirm-password',
+            'roles' => 'required'
+        ]);
+        $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
+        $user = Usuario::create($input);
+        $user->assignRole($request->input('roles'));
+        return redirect()->route('usuarios.index')->with('success', 'Usuário criado com sucesso');
     }
-
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Usuario  $usuario
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Usuario $usuario)
+    public function show($id)
     {
-        //
+        $usuario = Usuario::find($id);
+        return view('usuarios.show', compact('usuario'));
     }
-
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Usuario  $usuario
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Usuario $usuario)
+    public function edit($id)
     {
-        //
+        $usuario = Usuario::find($id);
+        $roles = Role::pluck('nome', 'nome')->all();
+        $userRole = $usuario->roles->pluck('nome', 'nome')->all();
+        return view('usuarios.edit', compact('usuario', 'roles', 'userRole'));
     }
-
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Usuario  $usuario
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Usuario $usuario)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'nome' => 'required',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'password' => 'same:confirm-password',
+            'roles' => 'required'
+        ]);
+        $input = $request->all();
+        if (!empty($input['password'])) {
+            $input['password'] = Hash::make($input['password']);
+        } else {
+            //$input = array_except($input, array('password'));
+            unset($input['password']);
+        }
+        $user = Usuario::find($id);
+        $user->update($input);
+        DB::table('model_has_roles')->where('model_id', $id)->delete();
+        $user->assignRole($request->input('roles'));
+        return redirect()->route('usuarios.index')->with('success', 'Usuario Atualizado com Sucesso');
     }
-
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Usuario  $usuario
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Usuario $usuario)
+    public function destroy($id)
     {
-        //
+        Usuario::find($id)->delete();
+        return redirect()->route('usuarios.index')->with('success', 'Usuario Excluido com Sucesso');
     }
 }
