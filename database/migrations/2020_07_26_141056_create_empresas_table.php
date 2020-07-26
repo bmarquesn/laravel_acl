@@ -19,7 +19,7 @@ class CreateEmpresasTable extends Migration
             $table->string('razao_social');
             $table->string('nome_fantasia');
             $table->string('cnpj');
-            $table->enum('ativo', ['sim', 'nao']);
+            $table->enum('ativo', ['sim', 'nao'])->default('sim');
             $table->timestamps();
         });
     }

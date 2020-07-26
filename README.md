@@ -19,7 +19,8 @@ CRUD Laravel com ACL para estudo e aprendizado do mesmo. Será feito no Windows.
                 - `'model' => App\Models\NomeModelUser::class`
         - Nos arquivos "migrate" que são criados, na função "up", inserir os campos que terão que existir na respectiva tabela
             - Consultar na URL [https://laravel.com/docs/7.x/migrations](https://laravel.com/docs/7.x/migrations) os tipos de campos para serem criados
-        - Depois de criadas as migrates, digitar o comando **php artisan migrate**
+        - Depois de criadas as migrations, digitar o comando **php artisan migrate**
+            - se preciso rodar novamente as migrations, digitar o comando **php artisan migrate:refresh**
     - Digitar o comando **php artisan serve**
 
 Foi utilizado ACL. Seguidas orientações do link:

@@ -23,7 +23,7 @@ class CreateEnderecosTable extends Migration
             $table->string('bairro');
             $table->string('cidade');
             $table->string('estado', 2);
-            $table->enum('ativo', ['sim', 'nao']);
+            $table->enum('ativo', ['sim', 'nao'])->default('sim');
             $table->timestamps();
         });
     }
