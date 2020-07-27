@@ -20,6 +20,7 @@
             </ul>
         </div>
     @endif
+    <p><em>A empresa será vinculada ao seu Usuário (Usuário que estiver logado)</em></p>
     <form action="{{ route('empresas.store') }}" method="POST">
         @csrf
         <div class="row">

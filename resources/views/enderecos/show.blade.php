@@ -3,34 +3,60 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2> Dados do Usuário</h2>
+                <h2>Dados do Endereço</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('users.index') }}"> Voltar</a>
+                <a class="btn btn-primary" href="{{ route('enderecos.index') }}"> Voltar</a>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Nome:</strong>
-                {{ $usuario->name }}
+                <strong>Empresa:</strong>
+                {{ $endereco->nomeEmpresa }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Email:</strong>
-                {{ $usuario->email }}
+                <strong>CEP:</strong>
+                {{ $endereco->cep }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Roles:</strong>
-                @if(!empty($usuario->getRoleNames()))
-                    @foreach($usuario->getRoleNames() as $v)
-                        <label class="badge badge-success">{{ $v }}</label>
-                    @endforeach
-                @endif
+                <strong>Logradouro:</strong>
+                {{ $endereco->logradouro }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Número:</strong>
+                {{ $endereco->numero }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Complemento:</strong>
+                {{ $endereco->complemento }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Bairro:</strong>
+                {{ $endereco->bairro }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Cidade:</strong>
+                {{ $endereco->cidade }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Estado:</strong>
+                {{ $endereco->estado }}
             </div>
         </div>
     </div>

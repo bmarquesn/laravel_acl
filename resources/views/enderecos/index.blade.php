@@ -6,7 +6,9 @@
                 <h2>Gestão de Endereços</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('enderecos.create') }}"> Criar Novo Endereço</a>
+                @can('endereco-create')
+                    <a class="btn btn-success" href="{{ route('enderecos.create') }}"> Criar Novo Endereço</a>
+                @endcan
             </div>
         </div>
     </div>
@@ -15,35 +17,33 @@
             <p>{{ $message }}</p>
         </div>
     @endif
+    <br />
     <table class="table table-bordered">
         <tr>
-            <th>Num</th>
             <th>Empresa</th>
             <th>CEP</th>
             <th width="280px">Ação</th>
         </tr>
-        @foreach($data as $key => $enderecos)
+        @foreach($enderecos as $endereco)
             <tr>
-                <td>{{ ++$i }}</td>
-                <td>{{ $enderecos->empresa_id }}</td>
-                <td>{{ $enderecos->cep }}</td>
-                <td>
-                    @if(!empty($enderecos->getRoleNames()))
-                        @foreach($enderecos->getRoleNames() as $v)
-                            <label class="badge badge-success">{{ $v }}</label>
-                @endforeach
-            @endif
-            </td>
+                <td>{{ $endereco->nomeEmpresa }}</td>
+                <td class="cep">{{ $endereco->cep }}</td>
             <td>
-                <a class="btn btn-info" href="{{ route('enderecos.show', $enderecos->id) }}">Exibir</a>
-                <a class="btn btn-primary" href="{{ route('enderecos.edit', $enderecos->id) }}">Editar</a>
-                {!! Form::open(['method' => 'DELETE', 'route' => ['enderecos.destroy', $enderecos->id], 'style' => 'display:inline']) !!}
-                {!! Form::submit('Excluir', ['class' => 'btn btn-danger']) !!}
-                {!! Form::close() !!}
+                <a class="btn btn-info" href="{{ route('enderecos.show', $endereco->id) }}">Exibir</a>
+                @can('empresa-edit')
+                    <a class="btn btn-primary" href="{{ route('enderecos.edit', $endereco->id) }}">Editar</a>
+                @endcan
+                @csrf
+                @method('DELETE')
+                @can('empresa-delete')
+                    {!! Form::open(['method' => 'DELETE', 'route' => ['enderecos.destroy', $endereco->id], 'style' => 'display:inline']) !!}
+                    {!! Form::submit('Excluir', ['class' => 'btn btn-danger']) !!}
+                    {!! Form::close() !!}
+                @endcan
             </td>
             </tr>
         @endforeach
     </table>
-    {!! $data->render() !!}
+    {!! $enderecos->render() !!}
     <p class="text-center text-primary"><small>Tutorial by rscoder.com</small></p>
 @endsection

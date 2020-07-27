@@ -16,7 +16,7 @@ class CreateEnderecosTable extends Migration
         Schema::create('enderecos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('empresa_id');
-            $table->integer('cep');
+            $table->string('cep', 8);
             $table->string('logradouro');
             $table->string('numero');
             $table->string('complemento')->nullable()->default(NULL);

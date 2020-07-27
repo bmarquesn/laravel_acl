@@ -17,9 +17,9 @@
             <p>{{ $message }}</p>
         </div>
     @endif
+    <br />
     <table class="table table-bordered">
         <tr>
-            <th>Num</th>
             <th>Vínculo Usuário</th>
             <th>Razão Social</th>
             <th>Nome Fantasia</th>
@@ -28,9 +28,10 @@
         </tr>
         @foreach($empresas as $empresa)
             <tr>
-                <td>{{ ++$i }}</td>
-                <td>{{ $empresa->name }}</td>
-                <td>{{ $empresa->detail }}</td>
+                <td>{{ $empresa->nomeUsuario }}</td>
+                <td>{{ $empresa->razao_social }}</td>
+                <td>{{ $empresa->nome_fantasia }}</td>
+                <td>{{ $empresa->cnpj }}</td>
                 <td>
                     <form action="{{ route('empresas.destroy', $empresa->id) }}" method="POST">
                         <a class="btn btn-info" href="{{ route('empresas.show', $empresa->id) }}">Exibir</a>

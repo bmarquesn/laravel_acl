@@ -17,15 +17,14 @@
             <p>{{ $message }}</p>
         </div>
     @endif
+    <br />
     <table class="table table-bordered">
         <tr>
-            <th>Num</th>
             <th>Nome</th>
             <th width="280px">Ação</th>
         </tr>
         @foreach($roles as $key => $role)
             <tr>
-                <td>{{ ++$i }}</td>
                 <td>{{ $role->name }}</td>
                 <td>
                     <a class="btn btn-info" href="{{ route('roles.show', $role->id) }}">Exibir</a>
@@ -35,7 +34,9 @@
                     @can('role-delete')
                         {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy', $role->id], 'style' =>
                         'display:inline']) !!}
-                        {!! Form::submit('Excluir', ['class' => 'btn btn-danger']) !!}
+                        @if($role->name != "Admin")
+                            {!! Form::submit('Excluir', ['class' => 'btn btn-danger']) !!}
+                        @endif
                         {!! Form::close() !!}
                     @endcan
                 </td>

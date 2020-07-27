@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Empresa;
 use Illuminate\Http\Request;
 
+/** Para utilizar a "SESSION" do usuário logado */
+use Illuminate\Support\Facades\Auth;
+/** Query Builder */
+use Illuminate\Support\Facades\DB;
+
 class EmpresaController extends Controller
 {
     /**
@@ -26,7 +31,9 @@ class EmpresaController extends Controller
      */
     public function index()
     {
-        $empresas = Empresa::latest()->paginate(5);
+        $empresas = DB::table('empresas')
+            ->leftJoin('users', 'users.id', '=', 'empresas.usuario_id')
+            ->paginate(5, array('users.name AS nomeUsuario', 'empresas.*'));
         return view('empresas.index', compact('empresas'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
     /**
@@ -51,6 +58,9 @@ class EmpresaController extends Controller
             'nome_fantasia' => 'required',
             'cnpj' => 'required',
         ]);
+        /** a Empresa será vinculada ao Usuário Logado */
+        $request['usuario_id'] = Auth::user()->id;
+
         Empresa::create($request->all());
         return redirect()->route('empresas.index')->with('success', 'Empresa criada com sucesso.');
     }

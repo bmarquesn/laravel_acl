@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Endereco;
+use App\Models\Empresa;
 use Illuminate\Http\Request;
+
+/** Query Builder */
+use Illuminate\Support\Facades\DB;
 
 class EnderecoController extends Controller
 {
@@ -26,7 +30,10 @@ class EnderecoController extends Controller
      */
     public function index()
     {
-        $enderecos = Endereco::latest()->paginate(5);
+        //$enderecos = Endereco::latest()->paginate(5);
+        $enderecos = DB::table('enderecos')
+            ->leftJoin('empresas', 'empresas.id', '=', 'enderecos.empresa_id')
+            ->paginate(5, array('empresas.nome_fantasia AS nomeEmpresa', 'enderecos.*'));
         return view('enderecos.index', compact('enderecos'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
     /**
@@ -36,7 +43,12 @@ class EnderecoController extends Controller
      */
     public function create()
     {
-        return view('enderecos.create');
+        /** para o select box de seleção da Empresa */
+        $empresas = Empresa::orderBy('nome_fantasia')->pluck('nome_fantasia', 'id')->toArray();
+        /** para o select box de seleção da Estados */
+        $ufs_brasil = $this->estados_brasileiros();
+
+        return view('enderecos.create', compact('empresas', 'ufs_brasil'));
     }
     /**
      * Store a newly created resource in storage.
@@ -47,6 +59,7 @@ class EnderecoController extends Controller
     public function store(Request $request)
     {
         request()->validate([
+            'empresa_id' => 'required',
             'cep' => 'required',
             'logradouro' => 'required',
             'numero' => 'required',
@@ -54,6 +67,8 @@ class EnderecoController extends Controller
             'cidade' => 'required',
             'estado' => 'required',
         ]);
+        /** CEP somente numeros */
+        $request['cep'] = preg_replace('/[^0-9]/', '', $request['cep']);
         Endereco::create($request->all());
         return redirect()->route('enderecos.index')->with('success', 'Endereço criado com sucesso.');
     }
@@ -65,6 +80,15 @@ class EnderecoController extends Controller
      */
     public function show(Endereco $endereco)
     {
+        //$endereco['nomeEmpresa'] = DB::table('empresas')->where('id', $endereco['empresa_id'])->get();
+        $empresa = DB::table('empresas')->where('id', $endereco['empresa_id'])->get();
+
+        if($empresa && !empty($empresa[0]->nome_fantasia)) {
+            $endereco['nomeEmpresa'] = $empresa[0]->nome_fantasia;
+        } else {
+            $endereco['nomeEmpresa'] = "";
+        }
+
         return view('enderecos.show', compact('endereco'));
     }
     /**
@@ -75,7 +99,10 @@ class EnderecoController extends Controller
      */
     public function edit(Endereco $endereco)
     {
-        return view('enderecos.edit', compact('endereco'));
+        $endereco['empresas'] = Empresa::orderBy('nome_fantasia')->pluck('nome_fantasia', 'id')->toArray();
+        /** para o select box de seleção da Estados */
+        $ufs_brasil = $this->estados_brasileiros();
+        return view('enderecos.edit', compact('endereco', 'ufs_brasil'));
     }
     /**
      * Update the specified resource in storage.
@@ -94,6 +121,7 @@ class EnderecoController extends Controller
             'cidade' => 'required',
             'estado' => 'required',
         ]);
+        $request['cep'] = preg_replace('/[^0-9]/', '', $request['cep']);
         $endereco->update($request->all());
         return redirect()->route('enderecos.index')->with('success', 'Endereco atualizado com sucesso');
     }

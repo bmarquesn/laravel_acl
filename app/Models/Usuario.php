@@ -14,7 +14,11 @@ class Usuario extends Authenticatable
     use Notifiable;
     use HasRoles;
 
-    protected $table = "usuarios";
+    /**
+     * 2020-07-27 - Bruno Nogueira
+     * Utilizando o ACL do Laravel, não há como utilizar uma tabela diferente de "users" para a tabela de "usuarios"
+     */
+    protected $table = "users";
 
     /**
      * The attributes that are mass assignable.
@@ -22,7 +26,7 @@ class Usuario extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nome', 'email', 'password', 'ativo' ,
+        'name', 'email', 'password', 'ativo' ,
     ];
 
     /**

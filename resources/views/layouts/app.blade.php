@@ -16,6 +16,7 @@
     <!-- Scripts -->
     <script type="text/javascript" src="{{ URL::asset('assets/js/jquery-3.4.1.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('assets/js/jquery.mask.min.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com" />
@@ -23,6 +24,9 @@
 
     <!-- Styles -->
     <link href="{{ URL::asset('assets/css/bootstrap/bootstrap.min.css') }}" rel="stylesheet" />
+
+    <script type="text/javascript" src="{{ URL::asset('assets/js/tablesorter/jquery.tablesorter.js') }}"></script>
+    <link href="{{ URL::asset('assets/css/tablesorter/style.css') }}" rel="stylesheet" />
 </head>
 
 <body>
@@ -52,11 +56,13 @@
                             <li><a class="nav-link" href="{{ route('empresas.index') }}">Empresas</a></li>
                             <li><a class="nav-link" href="{{ route('enderecos.index') }}">Endereços</a></li>
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->nome }} <span class="caret"></span>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
@@ -76,6 +82,14 @@
             </div>
         </main>
     </div>
+    <script type="text/javascript">
+        $(function() {
+            $("#tabela").tablesorter();
+            $('input[name="cnpj"]').mask('00.000.000/0000-00', {reverse: true});
+            $('input[name="cep"]').mask('00000-000');
+            $('td.cep').mask('00000-000');
+        });
+    </script>
 </body>
 
 </html>
