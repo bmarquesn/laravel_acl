@@ -26,6 +26,8 @@ CRUD Laravel com ACL para estudo e aprendizado do mesmo. Será feito no Windows.
 Foi utilizado ACL. Seguidas orientações do link:
 [http://www.rscoder.com/2020/05/laravel-7x-user-roles-and-permissions.html](http://www.rscoder.com/2020/05/laravel-7x-user-roles-and-permissions.html)
 
+_Será usada a class **Usuario** porém será usada a tabela **user**. Isso para abedecer toda a lógica ACL do Laravel. O mesmo foi feito para os campos desta tabela._
+
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
