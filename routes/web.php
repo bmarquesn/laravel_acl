@@ -17,6 +17,11 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
+/*Route::get('/exportar/{id}', function($id)
+{
+    return redirect()->action('ExportarController@index{id}')->name('exportar');
+});*/
+Route::get('/exportar', 'ExportarController@index')->name('exportar');
 
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles','RoleController');
