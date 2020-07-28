@@ -11,6 +11,9 @@ CRUD Laravel com ACL para estudo e aprendizado do mesmo. Será feito no Windows.
         - Será criada uma pasta "laravel". Pegar todos os arquivos desta pasta e colocá-los no diretório do projeto. Depois apagar esta pasta
             - Se o projeto vier do GIT, este por exemplo, será preciso baixar as libraries do Laravel \(Vendor e etc\) que estão no \.gitignore. Para isso ir no diretorio onde ficaram os arquivos baixados e digitar **composer install**
                 - Para gerar o key do arquivo ".env" **php artisan key:generate**
+                - Rodar os Seeders para criar no BD os registros básicos
+                    - **php artisan db:seed --class=CreateAdminUserSeeder**
+                    - **php artisan db:seed --class=PermissionTableSeeder**
     - Definir no arquivo \.env, que fica na raiz da aplicação, a configuracao com o banco de dados
     - Para padronização e boa utilização do framework Laravel, neste projeto serão usadas as "Migrations"
         - Migrations são os arquivos que criam as tabelas no Banco de Dados
