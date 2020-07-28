@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Usuario;
 use Spatie\Permission\Models\Role;
-use DB;
+/** Query Builder */
+use Illuminate\Support\Facades\DB;
 use Hash;
 
 class UsuarioController extends Controller

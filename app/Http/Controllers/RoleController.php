@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use DB;
+/** Query Builder */
+use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
