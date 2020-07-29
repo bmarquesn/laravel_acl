@@ -17,9 +17,15 @@ class ExportarController extends Controller
     //public function index($model_exportar)
     public function index()
     {
-        $model_exportar = 'enderecos';
+        if(isset($_GET['id']) && !empty($_GET['id'])) {
+            $model_exportar = $_GET['id'];
 
-        $registros = DB::table($model_exportar)->get();
-        var_dump($registros);die;
+            $registros['retorno'] = DB::table($model_exportar)->get();
+            $retorno['retorno'] = $registros['retorno'][0];
+        } else {
+            $retorno['retorno'] = "erro";
+        }
+
+        echo json_encode($retorno);
     }
 }
