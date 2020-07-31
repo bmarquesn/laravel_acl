@@ -20,7 +20,21 @@ class ExportarController extends Controller
             $model_exportar = $id;
 
             $registros['retorno'] = DB::table($model_exportar)->get();
-            $retorno['retorno'] = $registros['retorno'][0];
+
+            if(isset($registros['retorno'][0]) && !empty($registros['retorno'][0])) {
+                /** remover senha quando ususario */
+                if($model_exportar === "users") {
+                    foreach($registros['retorno'][0] as $key => $value) {
+                        if($key == "password") {
+                            unset($registros['retorno'][0]->$key);
+                        }
+                    }
+                }
+
+                $retorno['retorno'] = $registros['retorno'][0];
+            } else {
+                $retorno['retorno'] = "nao ha registros";
+            }
         } else {
             $retorno['retorno'] = "erro";
         }

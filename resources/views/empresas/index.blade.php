@@ -9,6 +9,7 @@
                 @can('empresa-create')
                     <a class="btn btn-success" href="{{ route('empresas.create') }}"> Criar Nova Empresa</a>
                 @endcan
+                <a class="btn btn-primary" href="{{ route('exportar', ['id' => 'empresas']) }}" target="_blank">Exportar Empresas (JSON)</a>
             </div>
         </div>
     </div>

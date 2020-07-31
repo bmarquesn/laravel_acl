@@ -7,6 +7,7 @@
             </div>
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('usuarios.create') }}"> Criar Novo Usuário</a>
+                <a class="btn btn-primary" href="{{ route('exportar', ['id' => 'users']) }}" target="_blank">Exportar Usuários (JSON)</a>
             </div>
         </div>
     </div>
