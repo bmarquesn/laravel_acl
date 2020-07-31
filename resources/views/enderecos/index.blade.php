@@ -1,18 +1,10 @@
 @extends('layouts.app')
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Gestão de Endereços</h2>
-            </div>
-            <div class="pull-right">
-                @can('endereco-create')
-                    <a class="btn btn-success" href="{{ route('enderecos.create') }}">Criar Novo Endereço</a>
-                @endcan
-                <a class="btn btn-primary" href="{{ route('exportar', ['id' => 'enderecos']) }}" target="_blank">Exportar Endereço (JSON)</a>
-            </div>
-        </div>
-    </div>
+    @component('components.titulos-paginas')
+    @slot('titulo_pagina')
+        Endereços
+    @endslot
+    @endcomponent
     @if($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>

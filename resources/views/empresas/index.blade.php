@@ -1,18 +1,10 @@
 @extends('layouts.app')
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Empresas</h2>
-            </div>
-            <div class="pull-right">
-                @can('empresa-create')
-                    <a class="btn btn-success" href="{{ route('empresas.create') }}"> Criar Nova Empresa</a>
-                @endcan
-                <a class="btn btn-primary" href="{{ route('exportar', ['id' => 'empresas']) }}" target="_blank">Exportar Empresas (JSON)</a>
-            </div>
-        </div>
-    </div>
+    @component('components.titulos-paginas')
+        @slot('titulo_pagina')
+            Empresas
+        @endslot
+    @endcomponent
     @if($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
