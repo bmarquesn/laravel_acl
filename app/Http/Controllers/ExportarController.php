@@ -14,11 +14,10 @@ class ExportarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    //public function index($model_exportar)
-    public function index()
+    public function index($id)
     {
-        if(isset($_GET['id']) && !empty($_GET['id'])) {
-            $model_exportar = $_GET['id'];
+        if(!empty($id)) {
+            $model_exportar = $id;
 
             $registros['retorno'] = DB::table($model_exportar)->get();
             $retorno['retorno'] = $registros['retorno'][0];
@@ -26,6 +25,6 @@ class ExportarController extends Controller
             $retorno['retorno'] = "erro";
         }
 
-        echo json_encode($retorno);
+        return json_encode($retorno);
     }
 }

@@ -9,7 +9,7 @@
                 @can('endereco-create')
                     <a class="btn btn-success" href="{{ route('enderecos.create') }}">Criar Novo Endereço</a>
                 @endcan
-                <a class="btn btn-primary" href="{{ route('exportar', ['id' => 'enderecos']) }}">Exportar Endereço (JSON)</a>
+                <a class="btn btn-primary" href="{{ route('exportar', ['id' => 'enderecos']) }}" target="_blank">Exportar Endereço (JSON)</a>
             </div>
         </div>
     </div>
