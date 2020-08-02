@@ -24,7 +24,11 @@ class PermissionTableSeeder extends Seeder
             'endereco-list',
             'endereco-create',
             'endereco-edit',
-            'endereco-delete'
+            'endereco-delete',
+            'usuario-list',
+            'usuario-create',
+            'usuario-edit',
+            'usuario-delete'
         ];
 
         foreach ($permissions as $permission) {

@@ -47,11 +47,4 @@ class Controller extends BaseController
 
 		return $estadosBrasileiros;
     }
-
-    /*public function exportar() {
-        $model_exportar = 'enderecos';
-
-        $registros = DB::table($model_exportar)->get();
-        var_dump($registros);die;
-    }*/
 }

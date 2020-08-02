@@ -20,6 +20,7 @@
             </ul>
         </div>
     @endif
+    {{ Route::currentRouteName() }}
     {!! Form::open(['route' => 'enderecos.store', 'method' => 'POST']) !!}
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -75,6 +76,4 @@
         </div>
     </div>
     {!! Form::close() !!}
-    <p class="text-center text-primary"><small>Tutorial by rscoder.com</small></p>
-    <script type="text/javascript" src="{{ URL::asset('assets/js/busca_cep.js') }}"></script>
 @endsection

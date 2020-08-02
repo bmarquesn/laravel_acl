@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel CRUD com ACL'),
+    'name' => env('APP_NAME', 'Laravel_CRUD_com_ACL'),
 
     /*
     |--------------------------------------------------------------------------

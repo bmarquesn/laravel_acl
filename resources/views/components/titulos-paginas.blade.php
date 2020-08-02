@@ -4,11 +4,17 @@
             <h2>{{ $titulo_pagina }} </h2>
         </div>
         <div class="pull-right">
-            {{ strtolower(substr($titulo_pagina, 0, -1)) }}
-            @can(strtolower(substr($titulo_pagina, 0, -1)).'-create')
-                <a class="btn btn-success" href="{{ route(strtolower($titulo_pagina).'.create') }}"> Criar Nova {{ substr($titulo_pagina, 0, -1) }}</a>
+            @can(strtolower($name_class).'-create')
+                <a class="btn btn-success" href="{{ route(strtolower($name_route).'.create') }}"> Criar Nova {{ substr($titulo_pagina, 0, -1) }}</a>
             @endcan
-            <a class="btn btn-primary" href="{{ route('exportar', ['id' => strtolower($titulo_pagina)]) }}" target="_blank">Exportar {{ $titulo_pagina }} (JSON)</a>
+            <a class="btn btn-primary" href="{{ route('exportar', ['id' => strtolower($name_route)]) }}" target="_blank">Exportar {{ $titulo_pagina }} (JSON)</a>
         </div>
     </div>
 </div>
+<br />
+@if($message = Session::get('success'))
+    <div class="alert alert-success">
+        <p>{{ $message }}</p>
+    </div>
+    <br />
+@endif

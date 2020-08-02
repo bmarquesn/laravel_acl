@@ -17,6 +17,12 @@ class ExportarController extends Controller
     public function index($id)
     {
         if(!empty($id)) {
+            if($id === 'regras') {
+                $id = 'roles';
+            } elseif($id === 'usuarios') {
+                $id = 'users';
+            }
+
             $model_exportar = $id;
 
             $registros['retorno'] = DB::table($model_exportar)->get();
@@ -31,7 +37,7 @@ class ExportarController extends Controller
                     }
                 }
 
-                $retorno['retorno'] = $registros['retorno'][0];
+                $retorno['retorno'] = $registros['retorno'];
             } else {
                 $retorno['retorno'] = "nao ha registros";
             }

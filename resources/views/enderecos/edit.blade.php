@@ -75,6 +75,6 @@
         </div>
     </div>
     {!! Form::close() !!}
-    <p class="text-center text-primary"><small>Tutorial by rscoder.com</small></p>
+
     <script type="text/javascript" src="{{ URL::asset('assets/js/busca_cep.js') }}"></script>
 @endsection
