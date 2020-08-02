@@ -27,13 +27,11 @@ class ExportarController extends Controller
 
             $registros['retorno'] = DB::table($model_exportar)->get();
 
-            if(isset($registros['retorno'][0]) && !empty($registros['retorno'][0])) {
+            if(count($registros['retorno']) > 0) {
                 /** remover senha quando ususario */
                 if($model_exportar === "users") {
-                    foreach($registros['retorno'][0] as $key => $value) {
-                        if($key == "password") {
-                            unset($registros['retorno'][0]->$key);
-                        }
+                    foreach($registros['retorno'] as $key => $value) {
+                        unset($registros['retorno'][$key]->password);
                     }
                 }
 
