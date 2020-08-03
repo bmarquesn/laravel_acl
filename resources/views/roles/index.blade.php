@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
-    @component('components.titulos-paginas', ["name_class" => "Role", "name_route" => "Roles"])
-        @slot('titulo_pagina')
-            {{ 'Regras' }}
-        @endslot
+    @component('components.titulos-paginas')
+        @slot('titulo_pagina'){{ 'Regras' }}@endslot
+        @slot('name_class'){{ 'Role' }}@endslot
+        @slot('name_route'){{ 'Roles' }}@endslot
     @endcomponent
     <table id="tabela" class="table table-bordered table-striped tablesorter">
         <thead>
@@ -19,10 +19,11 @@
                     <td>{{ $role->name }}</td>
                     <td>
                         <a class="btn btn-info" href="{{ route('roles.show', $role->id) }}">Exibir</a>
-                        @can('role-edit')
+                        @can('roles-edit')
                             <a class="btn btn-primary" href="{{ route('roles.edit', $role->id) }}">Editar</a>
                         @endcan
-                        @can('role-delete')
+                        @csrf
+                        @can('roles-delete')
                             {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy', $role->id], 'style' =>
                             'display:inline']) !!}
                             @if($role->name != "Admin")

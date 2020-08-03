@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
-    @component('components.titulos-paginas', ["name_class" => "Usuario", "name_route" => "Usuarios"])
-        @slot('titulo_pagina')
-            {{ 'Usuários' }}
-        @endslot
+    @component('components.titulos-paginas')
+        @slot('titulo_pagina'){{ 'Usuários' }}@endslot
+        @slot('name_class'){{ 'Usuario' }}@endslot
+        @slot('name_route'){{ 'Usuarios' }}@endslot
     @endcomponent
     <table id="tabela" class="table table-bordered table-striped tablesorter">
         <thead>
@@ -35,12 +35,17 @@
                     </td>
                     <td>
                         <a class="btn btn-info" href="{{ route('usuarios.show', $usuario->id) }}">Exibir</a>
-                        <a class="btn btn-primary" href="{{ route('usuarios.edit', $usuario->id) }}">Editar</a>
-                        {!! Form::open(['method' => 'DELETE', 'route' => ['usuarios.destroy', $usuario->id], 'style' => 'display:inline']) !!}
-                        @if(Auth::user()->id!=$usuario->id && $tipo_usuario != "Admin")
+                        @can('usuarios-edit')
+                            <a class="btn btn-primary" href="{{ route('usuarios.edit', $usuario->id) }}">Editar</a>
+                        @endcan
+                        @csrf
+                        @can('roles-delete')
+                            {!! Form::open(['method' => 'DELETE', 'route' => ['usuarios.destroy', $usuario->id], 'style' => 'display:inline']) !!}
+                            @if(Auth::user()->id!=$usuario->id && $tipo_usuario != "Admin")
                             {!! Form::submit('Excluir', ['class' => 'btn btn-danger']) !!}
-                        @endif
-                        {!! Form::close() !!}
+                            @endif
+                            {!! Form::close() !!}
+                        @endcan
                     </td>
                 </tr>
             @endforeach

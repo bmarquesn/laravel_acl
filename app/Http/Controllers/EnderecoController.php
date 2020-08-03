@@ -18,10 +18,10 @@ class EnderecoController extends Controller
      */
     function __construct()
     {
-        $this->middleware('permission:endereco-list|endereco-create|endereco-edit|endereco-delete', ['only' => ['index', 'show']]);
-        $this->middleware('permission:endereco-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:endereco-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:endereco-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:enderecos-list|enderecos-create|enderecos-edit|enderecos-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:enderecos-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:enderecos-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:enderecos-delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.

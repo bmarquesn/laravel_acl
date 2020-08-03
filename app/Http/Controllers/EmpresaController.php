@@ -19,10 +19,10 @@ class EmpresaController extends Controller
      */
     function __construct()
     {
-        $this->middleware('permission:empresa-list|empresa-create|empresa-edit|empresa-delete', ['only' => ['index', 'show']]);
-        $this->middleware('permission:empresa-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:empresa-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:empresa-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:empresas-list|empresas-create|empresas-edit|empresas-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:empresas-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:empresas-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:empresas-delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
-    @component('components.titulos-paginas', ["name_class" => "Endereco", "name_route" => "Enderecos"])
-        @slot('titulo_pagina')
-            {{ 'Endereços' }}
-        @endslot
+    @component('components.titulos-paginas')
+        @slot('titulo_pagina'){{ 'Endereços' }}@endslot
+        @slot('name_class'){{ 'Endereco' }}@endslot
+        @slot('name_route'){{ 'Enderecos' }}@endslot
     @endcomponent
     <table id="tabela" class="table table-bordered table-striped tablesorter">
         <thead>
@@ -21,12 +21,12 @@
                     <td class="cep">{{ $endereco->cep }}</td>
                 <td>
                     <a class="btn btn-info" href="{{ route('enderecos.show', $endereco->id) }}">Exibir</a>
-                    @can('endereco-edit')
+                    @can('enderecos-edit')
                         <a class="btn btn-primary" href="{{ route('enderecos.edit', $endereco->id) }}">Editar</a>
                     @endcan
                     @csrf
                     @method('DELETE')
-                    @can('endereco-delete')
+                    @can('enderecos-delete')
                         {!! Form::open(['method' => 'DELETE', 'route' => ['enderecos.destroy', $endereco->id], 'style' => 'display:inline']) !!}
                         {!! Form::submit('Excluir', ['class' => 'btn btn-danger']) !!}
                         {!! Form::close() !!}
