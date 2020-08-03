@@ -46,7 +46,19 @@ class RoleController extends Controller
     public function create()
     {
         $permission = Permission::get();
-        return view('roles.create', compact('permission'));
+
+        /** 2020-03-08 - Bruno Nogueira - Ajustar Interface para exibir as permissoes agrupadas */
+        $grupo_permissoes = [];
+
+        if(count($permission) > 0) {
+            foreach($permission as $key => $value) {
+                if(!in_array(explode("-", $value->name)[0], $grupo_permissoes)) {
+                    array_push($grupo_permissoes, explode("-", $value->name)[0]);
+                }
+            }
+        }
+
+        return view('roles.create', compact('grupo_permissoes', 'permission'));
     }
 
     /**
@@ -89,8 +101,20 @@ class RoleController extends Controller
     {
         $role = Role::find($id);
         $permission = Permission::get();
+
+        /** 2020-03-08 - Bruno Nogueira - Ajustar Interface para exibir as permissoes agrupadas */
+        $grupo_permissoes = [];
+
+        if(count($permission) > 0) {
+            foreach($permission as $key => $value) {
+                if(!in_array(explode("-", $value->name)[0], $grupo_permissoes)) {
+                    array_push($grupo_permissoes, explode("-", $value->name)[0]);
+                }
+            }
+        }
+
         $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", $id)->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')->all();
-        return view('roles.edit', compact('role', 'permission', 'rolePermissions'));
+        return view('roles.edit', compact('role', 'permission', 'rolePermissions', 'grupo_permissoes'));
     }
 
     /**

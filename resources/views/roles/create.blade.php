@@ -32,11 +32,22 @@
             <div class="form-group">
                 <strong>Permissão:</strong>
                 <br />
-                @foreach($permission as $value)
-                    <label>{{ Form::checkbox('permission[]', $value->id, false, ['class' => 'name']) }}
-                    {{ $value->name }}</label>
-                    <br />
+                <ul id="permissoes">
+                @foreach($grupo_permissoes as $value)
+                    <li><a href="#">{{$value}}</a>
+                        <ul class="list-unstyled" style="display:none;">
+                            @foreach($permission as $value2)
+                                @if(strstr($value2->name, $value))
+                                    <li><label>
+                                        {{ Form::checkbox('permission[]', $value2->id, false, ['class' => 'name']) }}
+                                        {{ explode("-", $value2->name)[1] }}
+                                    </label></li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </li>
                 @endforeach
+                </ul>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

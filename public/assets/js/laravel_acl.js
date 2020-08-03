@@ -1,4 +1,9 @@
 $(function() {
+    $("a").click(function(event) {
+        if ($(this).attr("href") === "http://#" || $(this).attr("href") === "#" || $(this).attr("href") === "") {
+            event.preventDefault();
+        }
+    });
     if(typeof(temTableSorter) != "undefined" && temTableSorter !== null){
         $("#tabela").tablesorter();
     }
@@ -12,5 +17,9 @@ $(function() {
         if(!confirmar){
             return false;
         }
+    });
+    /** menu e submenus pemissoes */
+    $('ul#permissoes').find('a').on('click', function(){
+        $(this).parent('li').children('ul').toggle('fast');
     });
 });
