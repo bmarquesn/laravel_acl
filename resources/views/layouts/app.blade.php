@@ -42,6 +42,7 @@
                                 <li><a class="nav-link" href="{{ route('roles.index') }}">Regras</a></li>
                                 <li><a class="nav-link" href="{{ route('empresas.index') }}">Empresas</a></li>
                                 <li><a class="nav-link" href="{{ route('enderecos.index') }}">Endereços</a></li>
+                                <li><a class="nav-link" href="{{ route('eloquent') }}">Eloquent: Relationships</a></li>
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

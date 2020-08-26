@@ -20,6 +20,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/exportar/{id}', 'ExportarController@index')->name('exportar');
 
+Route::get('/eloquent', 'EloquentController@index')->name('eloquent');
+
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles','RoleController');
     Route::resource('usuarios','UsuarioController');

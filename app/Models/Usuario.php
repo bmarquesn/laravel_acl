@@ -46,4 +46,14 @@ class Usuario extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the empresa record associated with the user.
+     */
+    public function empresa()
+    {
+        return $this->hasOne('App\Models\Empresa');
+        /** se na Empresa a foreign_key de usuario estiver diferente */
+        //return $this->hasOne('App\Phone', 'foreign_key');
+    }
 }
