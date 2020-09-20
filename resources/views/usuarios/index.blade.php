@@ -35,17 +35,17 @@
                     </td>
                     <td>
                         <a class="btn btn-info" href="{{ route('usuarios.show', $usuario->id) }}">Exibir</a>
-                        @can('usuarios-edit')
+                        {{-- @can('usuarios-edit') --}}
                             <a class="btn btn-primary" href="{{ route('usuarios.edit', $usuario->id) }}">Editar</a>
-                        @endcan
+                        {{-- @endcan --}}
                         @csrf
-                        @can('roles-delete')
+                        {{-- @can('roles-delete') --}}
                             {!! Form::open(['method' => 'DELETE', 'route' => ['usuarios.destroy', $usuario->id], 'style' => 'display:inline']) !!}
                             @if(Auth::user()->id!=$usuario->id && $tipo_usuario != "Admin")
                             {!! Form::submit('Excluir', ['class' => 'btn btn-danger']) !!}
                             @endif
                             {!! Form::close() !!}
-                        @endcan
+                        {{-- @endcan --}}
                     </td>
                 </tr>
             @endforeach

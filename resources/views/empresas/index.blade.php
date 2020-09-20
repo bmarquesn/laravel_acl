@@ -25,16 +25,16 @@
                     <td>{{ $empresa->cnpj }}</td>
                     <td>
                         <a class="btn btn-info" href="{{ route('empresas.show', $empresa->id) }}">Exibir</a>
-                        @can('empresas-edit')
+                        {{-- @can('empresas-edit') --}}
                             <a class="btn btn-primary" href="{{ route('empresas.edit', $empresa->id) }}">Editar</a>
-                        @endcan
+                        {{-- @endcan --}}
                         @csrf
-                        @can('empresas-delete')
+                        {{-- @can('empresas-delete') --}}
                             <form action="{{ route('empresas.destroy', $empresa->id) }}" method="POST">
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Excluir</button>
                             </form>
-                        @endcan
+                        {{-- @endcan --}}
                     </td>
                 </tr>
             @endforeach

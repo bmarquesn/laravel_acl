@@ -17,6 +17,19 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+        /*$this->middleware('permission:usuarios-list|usuarios-create|usuarios-edit|usuarios-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:usuarios-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:usuarios-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:usuarios-delete', ['only' => ['destroy']]);*/
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
     {
         $data = Usuario::orderBy('id', 'DESC')->paginate(5);

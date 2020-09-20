@@ -19,18 +19,18 @@
                     <td>{{ $role->name }}</td>
                     <td>
                         <a class="btn btn-info" href="{{ route('roles.show', $role->id) }}">Exibir</a>
-                        @can('roles-edit')
+                        {{-- @can('roles-edit') --}}
                             <a class="btn btn-primary" href="{{ route('roles.edit', $role->id) }}">Editar</a>
-                        @endcan
+                        {{-- @endcan --}}
                         @csrf
-                        @can('roles-delete')
+                        {{-- @can('roles-delete') --}}
                             {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy', $role->id], 'style' =>
                             'display:inline']) !!}
                             @if($role->name != "Admin")
                                 {!! Form::submit('Excluir', ['class' => 'btn btn-danger']) !!}
                             @endif
                             {!! Form::close() !!}
-                        @endcan
+                        {{-- @endcan --}}
                     </td>
                 </tr>
             @endforeach

@@ -21,16 +21,16 @@
                     <td class="cep">{{ $endereco->cep }}</td>
                 <td>
                     <a class="btn btn-info" href="{{ route('enderecos.show', $endereco->id) }}">Exibir</a>
-                    @can('enderecos-edit')
+                    {{-- @can('enderecos-edit') --}}
                         <a class="btn btn-primary" href="{{ route('enderecos.edit', $endereco->id) }}">Editar</a>
-                    @endcan
+                    {{-- @endcan --}}
                     @csrf
                     @method('DELETE')
-                    @can('enderecos-delete')
+                    {{-- @can('enderecos-delete') --}}
                         {!! Form::open(['method' => 'DELETE', 'route' => ['enderecos.destroy', $endereco->id], 'style' => 'display:inline']) !!}
                         {!! Form::submit('Excluir', ['class' => 'btn btn-danger']) !!}
                         {!! Form::close() !!}
-                    @endcan
+                    {{-- @endcan --}}
                 </td>
                 </tr>
             @endforeach
