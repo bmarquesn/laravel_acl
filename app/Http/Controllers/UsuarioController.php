@@ -128,4 +128,11 @@ class UsuarioController extends Controller
         Usuario::find($id)->delete();
         return redirect()->route('usuarios.index')->with('success', 'Usuario Excluido com Sucesso');
     }
+
+    public function list_api()
+    {
+        $data = Usuario::orderBy('name', 'ASC')->get();
+
+        return response()->json([$data]);
+    }
 }
